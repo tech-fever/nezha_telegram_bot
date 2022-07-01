@@ -1,0 +1,13 @@
+[TELEBOT]
+# Set the bot token
+BOT_TOKEN =
+# Set proxy url (for mainland China servers only)
+# If leave it empty, it will use the default value as below:
+# base_url = 'https://api.telegram.org/bot'
+# base_file_url = 'https://api.telegram.org/file/bot'
+BASE_URL =
+BASE_FILE_URL =
+
+[DEVELOPER]
+# Set the bot developer ID
+DEVELOPER_CHAT_ID =

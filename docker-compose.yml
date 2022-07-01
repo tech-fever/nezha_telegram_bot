@@ -1,0 +1,9 @@
+version: "3.3"
+
+services:
+  tgbot:
+    image: techfever/nezha_telegram_bot:latest
+    restart: always
+    volumes:
+      - ./conf.ini:/opt/nezha_telegram_bot/conf.ini
+      - ./data/:/opt/nezha_telegram_bot/data/

@@ -1,0 +1,452 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: telegram-bot-nezha\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2022-06-25 11:08-0400\n"
+"PO-Revision-Date: 2022-06-29 16:00\n"
+"Last-Translator: \n"
+"Language-Team: Chinese Simplified\n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Crowdin-Project: telegram-bot-nezha\n"
+"X-Crowdin-Project-ID: 522554\n"
+"X-Crowdin-Language: zh-CN\n"
+"X-Crowdin-File: myapplication.pot\n"
+"X-Crowdin-File-ID: 26\n"
+
+#: utils/controller.py:76
+msgid "🔗URL must begin with <b>https://</b> or <b>http://</b>❗"
+msgstr "🔗面板链接必须以 <b>https://</b> 或 <b>http://</b>开头❗"
+
+#: utils/controller.py:79
+msgid "🔗<b>Successfully</b> saved:\n"
+msgstr "🔗<b>成功保存：</b>\n"
+
+#: utils/controller.py:93
+msgid "🔑<b>Successfully</b> saved:\n"
+msgstr "🔑<b>成功保存：</b>\n"
+
+#: utils/controller.py:115 utils/controller.py:157
+msgid "{} Connection Failed.\n"
+"Status Code: {}.\n"
+"Error: {}"
+msgstr "{} 连接失败。\n"
+"状态码：{}。\n"
+"错误：{}"
+
+#: utils/controller.py:129 utils/controller.py:171 utils/handler.py:468
+msgid "No server detected."
+msgstr "未检测到服务器。"
+
+#: utils/handler.py:35
+msgid "version: 1.0.0"
+msgstr "版本： 1.0.0"
+
+#: utils/handler.py:38
+msgid "This bot is used to query servers details on "
+msgstr "此机器人用于查询哪吒面板服务器详细信息，哪吒面板项目文档： "
+
+#: utils/handler.py:40
+msgid "<i>DISCLAIMER: </i>"
+msgstr "<i>免责声明： </i>"
+
+#: utils/handler.py:41
+msgid "<b>Security of sensitive information is guaranteed.</b>"
+msgstr "<b>本机器人保证您敏感信息的安全性。</b>"
+
+#: utils/handler.py:42
+msgid "Please be aware of the risks."
+msgstr "请自行知悉潜在风险。"
+
+#: utils/handler.py:47
+msgid "No saved data.\n"
+"Please Set Up your Nezha Dashboard First‼️"
+msgstr "没有保存的数据。\n"
+"请先设置您的哪吒面板‼️"
+
+#: utils/handler.py:49
+msgid "🔗URL is not set.\n"
+"Please send /url YOUR_URL ❗"
+msgstr "🔗URL 未设置。\n"
+"请发送 /url 你的面板链接 ❗"
+
+#: utils/handler.py:51
+msgid "🔑TOKEN is not set.\n"
+"Please send /token YOUR_TOKEN ❗"
+msgstr "🔑TOKEN未设置。\n"
+"请发送 /token 你的token ❗"
+
+#: utils/handler.py:55
+msgid "Set URL & TOKEN 🆙"
+msgstr "设置链接和token"
+
+#: utils/handler.py:56
+msgid "Check My Panel Params"
+msgstr "检查我的面板信息"
+
+#: utils/handler.py:58
+msgid "Query Server DATA>>"
+msgstr "查询服务器数据>>"
+
+#: utils/handler.py:59
+msgid "Delete Saved 🔗URL and 🔑TOKEN ‼️"
+msgstr "删除已保存的🔗链接和🔑TOKEN!!"
+
+#: utils/handler.py:61 utils/handler.py:94
+msgid "Refresh Main Menu"
+msgstr "刷新主菜单"
+
+#: utils/handler.py:62 utils/handler.py:95
+msgid "切换语言"
+msgstr "Switch language"
+
+#: utils/handler.py:64
+msgid "Close Menu"
+msgstr "关闭菜单"
+
+#: utils/handler.py:73
+msgid "Your Nezha Dashboard is:\n"
+msgstr "您的哪吒面板是：\n"
+
+#: utils/handler.py:76
+msgid "<b>Start NOW</b>!"
+msgstr "<b>现在就开始</b>！"
+
+#: utils/handler.py:86
+msgid "Set up 🔗URL"
+msgstr "设置 🔗链接"
+
+#: utils/handler.py:87
+msgid "Set up 🔑TOKEN"
+msgstr "设置 🔑TOKEN"
+
+#: utils/handler.py:90
+msgid "Set up ALL"
+msgstr "设置全部"
+
+#: utils/handler.py:91
+msgid "Delete ALL"
+msgstr "删除所有保存数据"
+
+#: utils/handler.py:132
+msgid "Here is the query summary for your Nezha panel:\n"
+"============================"
+msgstr "这是您哪吒面板的统计摘要：\n"
+"=============================="
+
+#: utils/handler.py:133
+msgid "Servers number:               {:>4}"
+msgstr "服务器数量： {:>4}"
+
+#: utils/handler.py:134
+msgid "Tags number:                    {:>4}"
+msgstr "分组的数量： {:>4}"
+
+#: utils/handler.py:135
+msgid "Offline servers number:    {:>4}"
+msgstr "离线服务器： {:>4}"
+
+#: utils/handler.py:136
+msgid "Servers with ipv4 & ipv6: {:>4}"
+msgstr "双栈服务器： {:>4}"
+
+#: utils/handler.py:151
+msgid "Get Summary on All Servers"
+msgstr "获取所有服务器的统计信息"
+
+#: utils/handler.py:152
+msgid "List All Offline Servers"
+msgstr "列出所有离线服务器"
+
+#: utils/handler.py:155 utils/handler.py:182 utils/handler.py:238
+msgid "Back to Main Menu"
+msgstr "返回主菜单"
+
+#: utils/handler.py:167 utils/handler.py:268
+msgid "Time out request. Please send /start to return to the Main Menu."
+msgstr "超时请求。请发送 /start 返回主菜单。"
+
+#: utils/handler.py:181
+msgid "{} summary in detail"
+msgstr "{} 详细统计数据总结"
+
+#: utils/handler.py:186
+msgid "Here is the summary for tag {}"
+msgstr "下面是分组 {} 的摘要"
+
+#: utils/handler.py:187
+msgid "Servers number:  {}"
+msgstr "服务器数量： {}"
+
+#: utils/handler.py:188
+msgid "Offline servers number:      {}"
+msgstr "离线服务器： {}"
+
+#: utils/handler.py:189
+msgid "Servers with ipv4 & ipv6:   {}"
+msgstr "双栈服务器： {}"
+
+#: utils/handler.py:194 utils/handler.py:275 utils/handler.py:464
+#: utils/nezha.py:77
+msgid "❇️Online"
+msgstr "❇️在线"
+
+#: utils/handler.py:194 utils/handler.py:275 utils/handler.py:464
+#: utils/nezha.py:77
+msgid "☠️Offline"
+msgstr "☠️掉线"
+
+#: utils/handler.py:209
+msgid "Parameters Error!\n"
+"Please send /id id again."
+msgstr "参数错误！\n"
+"请重新发送 /id 服务器id"
+
+#: utils/handler.py:213
+msgid "Input id is not a positive integer.\n"
+"Please send /id id again."
+msgstr "输入ID不是正整数。\n"
+"请重新发送 /id 服务器id"
+
+#: utils/handler.py:223 utils/handler.py:443
+msgid "Please add {} for your nezha monitoring site."
+msgstr "请为您的哪吒监测站点添加 {} 信息。"
+
+#: utils/handler.py:237
+msgid "Refresh"
+msgstr "刷新"
+
+#: utils/handler.py:278
+msgid "Congratulations! No offline server found."
+msgstr "恭喜！未发现离线服务器。"
+
+#: utils/handler.py:297
+msgid "`YOUR_URL YOUR_TOKEN`"
+msgstr "`YOUR_URL YOUR_TOKEN`"
+
+#: utils/handler.py:299
+msgid "`YOUR_{}`"
+msgstr "`YOUR_{}`"
+
+#: utils/handler.py:302
+msgid "Please set up your Nezha dashboard by /{} {}"
+msgstr "请通过 /{} {} 设置您的哪吒面板"
+
+#: utils/handler.py:344
+msgid "Here is your saved data:"
+msgstr "这是您保存的数据："
+
+#: utils/handler.py:352
+#, python-brace-format
+msgid "{0} is not set.\n"
+"Please send: /{1} YOUR_{0}"
+msgstr "{0} 未设置。\n"
+"请发送: /{1} 您的{0}"
+
+#: utils/handler.py:364
+msgid "Your 🔗URL and 🔑TOKEN was <b>DELETED</b>!\n"
+"Use /start to go back to the main menu.\n"
+"Use /add to set your Data. "
+msgstr "您的 🔗URL 和 🔑TOKEN <b>已删除</b>！\n"
+"使用 /start 返回主菜单。\n"
+"使用 /add 来设置您的数据。 "
+
+#: utils/handler.py:375
+msgid "Confirm to Delete"
+msgstr "确认删除"
+
+#: utils/handler.py:376
+msgid "Cancel"
+msgstr "取消操作"
+
+#: utils/handler.py:379
+msgid "Please confirm your request:"
+msgstr "请确认您的请求："
+
+#: utils/handler.py:388
+msgid "Parameters Error!\n"
+"Please send: /add YOUR_URL YOUR_TOKEN"
+msgstr "参数错误！\n"
+"请发送: /add YOUR_URL YOUR_TOKEN"
+
+#: utils/handler.py:392
+msgid "Use /start to Start."
+msgstr "使用 /start 来使用本机器人"
+
+#: utils/handler.py:405
+msgid "Parameters Error!\n"
+"Please use: /url YOUR_URL"
+msgstr "参数错误！\n"
+"请使用：/url YOUR_URL"
+
+#: utils/handler.py:422
+msgid "Parameters Error!\n"
+"Please use: /token YOUR_TOKEN"
+msgstr "参数错误!\n"
+"请使用: /token YOUR_TOKEN"
+
+#: utils/handler.py:447
+msgid "No input words! Please send /search keywords."
+msgstr "没有输入关键词！请发送 /search 关键词（支持多个）。"
+
+#: utils/handler.py:449
+msgid "Loading..."
+msgstr "加载中..."
+
+#: utils/handler.py:468
+msgid "Please try again."
+msgstr "请重试。"
+
+#: utils/handler.py:481
+msgid "Use /start to start."
+msgstr "使用 /start 来使用本机器人。"
+
+#: utils/handler.py:482
+msgid "Use /add YOUR_URL YOUR_TOKEN to add your site data."
+msgstr "使用 /add YOUR_URL YOUR_TOKEN 来添加您的站点数据。"
+
+#: utils/handler.py:483
+msgid "Use /delete to delete saved data."
+msgstr "使用 /delete 删除已保存的数据。"
+
+#: utils/handler.py:484
+msgid "Use /url YOUR_URL to update url."
+msgstr "使用 /url YOUR_URL 更新URL。"
+
+#: utils/handler.py:485
+msgid "Use /token YOUR_TOKEN to update token."
+msgstr "使用 /token YOUR_TAKEN 来更新令牌。"
+
+#: utils/handler.py:486
+msgid "Use /info to get your url and token."
+msgstr "使用 /info 获取您的URL和令牌。"
+
+#: utils/handler.py:487
+msgid "Use /id id to query by id directly."
+msgstr "使用 /id 直接通过 id 查询。"
+
+#: utils/handler.py:488
+msgid "Use /all to get statistics summary of all servers."
+msgstr "使用 /all 获取所有服务器的统计数据摘要。"
+
+#: utils/handler.py:489
+msgid "Use /search keywords to search in server names."
+msgstr "使用 /search 关键字 搜索服务器名称。"
+
+#: utils/handler.py:490
+msgid "Please enjoy your time!"
+msgstr "玩得愉快！"
+
+#: utils/handler.py:530
+msgid "This command is not allowed in groups! Please send it privately!"
+msgstr "此命令不允许在群组中使用！请私聊发送！"
+
+#: utils/nezha.py:78
+msgid "No CPU info"
+msgstr "无 CPU 信息"
+
+#: utils/nezha.py:105
+msgid "Platform:  {}"
+msgstr "平台： {}"
+
+#: utils/nezha.py:106
+msgid "CPU info:        {}"
+msgstr "CPU 信息： {}"
+
+#: utils/nezha.py:107
+msgid "Uptime:    {}"
+msgstr "运行时间： {}"
+
+#: utils/nezha.py:108
+msgid "Load:       {:.2f} {:.2f} {:.2f}"
+msgstr "负载： {:.2f} {:.2f} {:.2f}"
+
+#: utils/nezha.py:109
+msgid "CPU:        {:.2%} [{}]"
+msgstr "CPU： {:.2%} [{}]"
+
+#: utils/nezha.py:110
+msgid "MemUsed:   {:<3.1%} [{}/{}]"
+msgstr "内存： {:<3.1%} [{}/{}]"
+
+#: utils/nezha.py:111
+msgid "SwapUsed:  {:<3.1%} [{}/{}]"
+msgstr "交换： {:<3.1%} [{}/{}]"
+
+#: utils/nezha.py:112
+msgid "DiskUsed:    {:<3.1%} [{}/{}]"
+msgstr "磁盘： {:<3.1%} [{}/{}]"
+
+#: utils/nezha.py:113
+msgid "Transfer:      ↓{:<10s} ↑{}"
+msgstr "流量： ↓{:<10s} ↑{}"
+
+#: utils/nezha.py:114
+msgid "TransRate:   ↓{:<10s} ↑{}/s"
+msgstr "网速： ↓{:<10s} ↑{}/s"
+
+#: utils/nezha.py:115 utils/nezha.py:185
+msgid "\n"
+"Updated on:{:>25}"
+msgstr "\n"
+"更新于：{:>25}"
+
+#: utils/nezha.py:172
+msgid "Total Summary for {}"
+msgstr "{} 统计信息"
+
+#: utils/nezha.py:174
+msgid "Server Number:           {}"
+msgstr "服务器数量： {}"
+
+#: utils/nezha.py:175
+msgid "Online Server Number: {}"
+msgstr "在线服务器： {}"
+
+#: utils/nezha.py:176
+msgid "CPU Cores:       {}"
+msgstr "CPU核心数： {}"
+
+#: utils/nezha.py:177
+msgid "Memory Usage:{:<3.1%} [{}/{}]"
+msgstr "内存： {:<3.1%} [{}/{}]"
+
+#: utils/nezha.py:178
+msgid "Swap Usage:     {:<3.1%} [{}/{}]"
+msgstr "交换： {:<3.1%} [{}/{}]"
+
+#: utils/nezha.py:179
+msgid "Disk Usage:       {:<3.1%} [{}/{}]"
+msgstr "磁盘： {:<3.1%} [{}/{}]"
+
+#: utils/nezha.py:180
+msgid "NetInSpeed:       ↓{}/s"
+msgstr "下行速度： ↓{}/s"
+
+#: utils/nezha.py:181
+msgid "NetOutSpeed:    ↑{}/s"
+msgstr "上行速度： ↑{}/s"
+
+#: utils/nezha.py:182
+msgid "NetInTransfer:     ↓{}"
+msgstr "下行流量： ↓{}"
+
+#: utils/nezha.py:183
+msgid "NetOutTransfer: ↑{}"
+msgstr "上行流量： ↑{}"
+
+#: utils/nezha.py:184
+msgid "Traffic Parity:      {:<3.1%}"
+msgstr "流量对等性： {:<3.1%}"
+
+#: utils/nezha.py:209
+msgid "{} Days {} Hours"
+msgstr "{} 天 {} 小时"
+
+#: utils/nezha.py:211
+msgid "{} Hours {} Minutes"
+msgstr "{} 小时 {} 分钟"
+
