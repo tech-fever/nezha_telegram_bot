@@ -7,7 +7,7 @@ on:
       - '*'
   pull_request:
     paths:
-      - .github/workflows/build-image.yml
+      - .github/workflows/docker-image.yml
       - Dockerfile
 jobs:
   build-image:
