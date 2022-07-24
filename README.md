@@ -129,6 +129,9 @@ docker rmi 需要删除的镜像ID # 在这个例子里就是1d92ec28e0fb
 本项目使用 `crowdin` 进行多语言翻译，如对语言有建议/想要贡献新的语言请至项目地址：
 https://zh.crowdin.com/translate/telegram-bot-nezha/
 
+成为翻译者：
+https://crwd.in/telegram-bot-nezha
+
 （作者也是第一次用 `crowdin` ，但是发现还蛮好上手的）
 
 也可以下载项目中的 'myapplication.pot' 文件至本地进行编辑开发。
