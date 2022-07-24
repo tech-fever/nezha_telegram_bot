@@ -101,6 +101,7 @@ def getNezhaList(context, tag=''):
 
     headers = {
         'Authorization': token,
+        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.116 Safari/537.36',
     }
     url = url.strip('/')
     url = url + LIST_ROUTER + 'tag=' + tag
@@ -174,8 +175,5 @@ def getNezhaDetail(context, server_id='', tag=''):
         return [False, msg, None]
 
 
-def isPrivateChat(update) -> bool:
-    if update.effective_chat.id == update.effective_user.id:
-        return True
-    else:
-        return False
+def isPrivateChat(update: Update) -> bool:
+    return update.effective_chat.type == 'private'

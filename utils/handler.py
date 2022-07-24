@@ -104,7 +104,7 @@ def start_command(update: Update, context: CallbackContext) -> None:
             reply_markup=reply_markup,
             parse_mode='html',
         )
-    else:
+    elif update.callback_query.text != disclaimer + text:
         update.callback_query.edit_message_text(
             disclaimer
             + text,
@@ -250,6 +250,8 @@ def get_detail_keyboard(update: Update, context: CallbackContext, server_id_str=
         if not controller.isPrivateChat(update):
             message = send_message(text=text, parse_mode='html')
         else:
+            if update.callback_query and text == update.effective_message.text:
+                return
             send_message(text=text, reply_markup=reply_markup, parse_mode='html')
     else:
         message = send_message(text=text)
@@ -535,19 +537,21 @@ def error_handler(update: object, context: CallbackContext) -> None:
     context.bot.send_message(chat_id=context.bot_data['developer_chat_id'], text=message, parse_mode=ParseMode.HTML)
 
 
-def preprocess_group(update: Update, context: CallbackContext):
+def pre_check_group_banned_cmd(update: Update, context: CallbackContext):
     if 'language' not in context.user_data:
         context.user_data['language'] = 'Chinese'
     user_language = context.user_data['language']
     _ = languages[user_language].gettext
 
-    if not controller.isPrivateChat(update) and update.message is not None and update.message.text is not None:
-        for cmd in context.bot_data['group_banned_command']:
-            if update.message.text.startswith(cmd):
-                message = update.effective_message.reply_text(
-                    _("This command is not allowed in groups! Please send it privately!"))
-                context.job_queue.run_once(automatic_delete_message, auto_delete_duration, context=message)
-                raise DispatcherHandlerStop
+    cmd = update.effective_message.text.split()[0]
+    if '@' in cmd:
+        cmd = cmd.split('@')[0]
+
+    if cmd in context.bot_data['group_banned_command']:
+        message = update.effective_message.reply_text(
+            _("This command is not allowed in groups! Please send it privately!"))
+        context.job_queue.run_once(automatic_delete_message, auto_delete_duration, context=message)
+        raise DispatcherHandlerStop
 
 
 def automatic_delete_message(context: CallbackContext):

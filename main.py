@@ -30,7 +30,8 @@ def main():
     dispatcher.bot_data['group_enabled_command'] = {'/help', '/id', '/all', '/search'}
     dispatcher.bot_data['group_banned_command'] = {'/start', '/add', '/url', '/token', '/info', '/delete'}
     # handlers that are forbidden in groups
-    group_banned_handlers = TypeHandler(Update, utils.handler.preprocess_group)
+    group_banned_handlers = MessageHandler(filters=Filters.chat_type.groups & Filters.command,
+                                           callback=handler.pre_check_group_banned_cmd)
     dispatcher.add_handler(group_banned_handlers, -1)
     # on different commands - answer in Telegram
 
