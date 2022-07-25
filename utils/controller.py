@@ -4,6 +4,7 @@ import re
 import requests as requests
 import time
 from utils import nezha
+from telegram import Update
 
 _, languages = gettext.gettext, dict()
 # gettext.find('myapplication', languages=['zh_CN', 'en_US'], localedir='locale')
