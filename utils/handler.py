@@ -30,6 +30,11 @@ logger = logging.getLogger(__name__)
 # Command handlers
 def start_command(update: Update, context: CallbackContext) -> None:
     """Sends a message with inline buttons attached."""
+    if 'language' not in context.user_data:
+        context.user_data['language'] = 'Chinese'
+    user_language = context.user_data['language']
+    _ = languages[user_language].gettext
+
     user_language = context.user_data['language']
     _ = languages[user_language].gettext
 
@@ -556,3 +561,8 @@ def pre_check_group_banned_cmd(update: Update, context: CallbackContext):
 
 def automatic_delete_message(context: CallbackContext):
     context.job.context.delete()
+
+
+def add_language(update: Update, context: CallbackContext):
+    if 'language' not in context.user_data:
+        context.user_data['language'] = 'Chinese'

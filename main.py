@@ -33,7 +33,10 @@ def main():
     # handlers that are forbidden in groups
     group_banned_handlers = MessageHandler(filters=Filters.chat_type.groups & Filters.command,
                                            callback=handler.pre_check_group_banned_cmd)
+    add_language_handlers = MessageHandler(filters=Filters.chat_type.private & Filters.command,
+                                           callback=handler.add_language)
     dispatcher.add_handler(group_banned_handlers, -1)
+    dispatcher.add_handler(add_language_handlers, -1)
     # on different commands - answer in Telegram
 
     dispatcher.add_handler(CommandHandler('start', handler.start_command))
