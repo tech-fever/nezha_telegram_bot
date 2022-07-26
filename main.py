@@ -4,9 +4,10 @@ import os
 import time
 
 from telegram import Update
-from telegram.ext import Updater, CommandHandler, PicklePersistence, CallbackQueryHandler, TypeHandler
+from telegram.ext import Updater, CommandHandler, PicklePersistence, CallbackQueryHandler, TypeHandler, MessageHandler, \
+    Filters
 
-import utils.handler
+from utils import handler
 from utils.get_config import GetConfig
 
 
@@ -35,18 +36,18 @@ def main():
     dispatcher.add_handler(group_banned_handlers, -1)
     # on different commands - answer in Telegram
 
-    dispatcher.add_handler(CommandHandler('start', utils.handler.start_command))
-    dispatcher.add_handler(CommandHandler('help', utils.handler.help_command, run_async=True))
-    dispatcher.add_handler(CommandHandler('add', utils.handler.add_command))
-    dispatcher.add_handler(CommandHandler('url', utils.handler.url_command))
-    dispatcher.add_handler(CommandHandler('token', utils.handler.token_command))
-    dispatcher.add_handler(CommandHandler('info', utils.handler.info_command))
-    dispatcher.add_handler(CommandHandler('delete', utils.handler.delete_command))
-    dispatcher.add_handler(CommandHandler('id', utils.handler.get_detail_keyboard, run_async=True))
-    dispatcher.add_handler(CommandHandler('all', utils.handler.get_detail_keyboard, run_async=True))
-    dispatcher.add_handler(CommandHandler('search', utils.handler.search_command, run_async=True))
-    updater.dispatcher.add_handler(CallbackQueryHandler(utils.handler.button, run_async=True))
-    dispatcher.add_error_handler(utils.handler.error_handler, run_async=True)
+    dispatcher.add_handler(CommandHandler('start', handler.start_command))
+    dispatcher.add_handler(CommandHandler('help', handler.help_command, run_async=True))
+    dispatcher.add_handler(CommandHandler('add', handler.add_command))
+    dispatcher.add_handler(CommandHandler('url', handler.url_command))
+    dispatcher.add_handler(CommandHandler('token', handler.token_command))
+    dispatcher.add_handler(CommandHandler('info', handler.info_command))
+    dispatcher.add_handler(CommandHandler('delete', handler.delete_command))
+    dispatcher.add_handler(CommandHandler('id', handler.get_detail_keyboard, run_async=True))
+    dispatcher.add_handler(CommandHandler('all', handler.get_detail_keyboard, run_async=True))
+    dispatcher.add_handler(CommandHandler('search', handler.search_command, run_async=True))
+    updater.dispatcher.add_handler(CallbackQueryHandler(handler.button, run_async=True))
+    dispatcher.add_error_handler(handler.error_handler, run_async=True)
 
     # job job_queue
 
