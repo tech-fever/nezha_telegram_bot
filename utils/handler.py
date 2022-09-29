@@ -7,8 +7,8 @@ import logging
 import time
 import traceback
 
-from telegram import Update, InlineKeyboardButton, InlineKeyboardMarkup, ParseMode
-from telegram.ext import CallbackContext, DispatcherHandlerStop
+from telegram import Update, InlineKeyboardButton, InlineKeyboardMarkup
+from telegram.ext import CallbackContext
 
 from utils import controller
 
@@ -30,9 +30,7 @@ logger = logging.getLogger(__name__)
 # Command handlers
 def start_command(update: Update, context: CallbackContext) -> None:
     """Sends a message with inline buttons attached."""
-    if 'language' not in context.user_data:
-        context.user_data['language'] = 'Chinese'
-    user_language = context.user_data['language']
+    user_language = context.user_data.setdefault('language', 'Chinese')
     _ = languages[user_language].gettext
 
     user_language = context.user_data['language']
@@ -81,7 +79,6 @@ def start_command(update: Update, context: CallbackContext) -> None:
             + '\n'
             + _("<b>Start NOW</b>!"),
             reply_markup=reply_markup,
-            parse_mode='html',
         )
 
         return
@@ -107,19 +104,17 @@ def start_command(update: Update, context: CallbackContext) -> None:
             disclaimer
             + text,
             reply_markup=reply_markup,
-            parse_mode='html',
         )
-    elif update.callback_query.text != disclaimer + text:
+    elif update.effective_message.text_html != disclaimer + text:
         update.callback_query.edit_message_text(
             disclaimer
             + text,
             reply_markup=reply_markup,
-            parse_mode='html',
         )
 
 
 def check_keyboard(update: Update, context: CallbackContext) -> None:
-    user_language = context.user_data['language']
+    user_language = context.user_data.setdefault('language', 'Chinese')
     _ = languages[user_language].gettext
 
     isListOK, text, server_list = controller.getNezhaList(context)
@@ -166,7 +161,7 @@ def check_keyboard(update: Update, context: CallbackContext) -> None:
 
 
 def tag_keyboard(update: Update, context: CallbackContext, tag='') -> None:
-    user_language = context.user_data['language']
+    user_language = context.user_data.setdefault('language', 'Chinese')
     _ = languages[user_language].gettext
 
     if 'server_list' not in context.user_data:
@@ -203,7 +198,7 @@ def tag_keyboard(update: Update, context: CallbackContext, tag='') -> None:
 
 
 def get_detail_keyboard(update: Update, context: CallbackContext, server_id_str='', tag=''):
-    user_language = context.user_data['language']
+    user_language = context.user_data.setdefault('language', 'Chinese')
     _ = languages[user_language].gettext
 
     if update.callback_query is None:
@@ -253,11 +248,11 @@ def get_detail_keyboard(update: Update, context: CallbackContext, server_id_str=
         text = server_list_detail.detail
         reply_markup = InlineKeyboardMarkup(keyboard)
         if not controller.isPrivateChat(update):
-            message = send_message(text=text, parse_mode='html')
+            message = send_message(text=text)
         else:
             if update.callback_query and text == update.effective_message.text:
                 return
-            send_message(text=text, reply_markup=reply_markup, parse_mode='html')
+            send_message(text=text, reply_markup=reply_markup)
     else:
         message = send_message(text=text)
 
@@ -276,7 +271,7 @@ def language_keyboard(update: Update, context: CallbackContext) -> None:
 
 
 def list_offline_keyboard(update: Update, context: CallbackContext) -> None:
-    user_language = context.user_data['language']
+    user_language = context.user_data.setdefault('language', 'Chinese')
     _ = languages[user_language].gettext
 
     send_message = update.callback_query.edit_message_text
@@ -299,7 +294,7 @@ def list_offline_keyboard(update: Update, context: CallbackContext) -> None:
 
 def button(update: Update, context: CallbackContext) -> None:
     """Parses the CallbackQuery and updates the message text."""
-    user_language = context.user_data['language']
+    user_language = context.user_data.setdefault('language', 'Chinese')
     _ = languages[user_language].gettext
 
     query = update.callback_query
@@ -355,7 +350,7 @@ def button(update: Update, context: CallbackContext) -> None:
 
 
 def info_command(update: Update, context: CallbackContext) -> None:
-    user_language = context.user_data['language']
+    user_language = context.user_data.setdefault('language', 'Chinese')
     _ = languages[user_language].gettext
 
     texts = [_('Here is your saved data:')]
@@ -367,11 +362,11 @@ def info_command(update: Update, context: CallbackContext) -> None:
             texts.append(icon + fr'{key.upper()}: <span class="tg-spoiler">{context.user_data[key]}</span>')
         else:
             texts.append(icon + _("{0} is not set.\nPlease send: /{1} YOUR_{0}").format(key.upper(), key))
-    context.bot.send_message(chat_id=update.effective_chat.id, text='\n'.join(texts), parse_mode='html')
+    context.bot.send_message(chat_id=update.effective_chat.id, text='\n'.join(texts))
 
 
 def delete_command(update: Update, context: CallbackContext) -> None:
-    user_language = context.user_data['language']
+    user_language = context.user_data.setdefault('language', 'Chinese')
     _ = languages[user_language].gettext
 
     if update.callback_query is None or update.callback_query.data == 'confirm delete':
@@ -381,11 +376,9 @@ def delete_command(update: Update, context: CallbackContext) -> None:
         text = _("Your 🔗URL and 🔑TOKEN was <b>DELETED</b>!\nUse /start to go back to the main menu.\nUse /add to"
                  " set your Data. ")
         if update.callback_query is None:
-            context.bot.send_message(chat_id=update.effective_chat.id, text=text,
-                                     parse_mode='html')
+            context.bot.send_message(chat_id=update.effective_chat.id, text=text)
         else:
-            update.callback_query.edit_message_text(text=text,
-                                                    parse_mode='html')
+            update.callback_query.edit_message_text(text=text)
     else:
         # Need confirmation
         keyboard = [
@@ -394,11 +387,11 @@ def delete_command(update: Update, context: CallbackContext) -> None:
         ]
         reply_markup = InlineKeyboardMarkup(keyboard)
         text = _("Please confirm your request:")
-        update.callback_query.edit_message_text(text=text, reply_markup=reply_markup, parse_mode='html')
+        update.callback_query.edit_message_text(text=text, reply_markup=reply_markup)
 
 
 def add_command(update: Update, context: CallbackContext) -> None:
-    user_language = context.user_data['language']
+    user_language = context.user_data.setdefault('language', 'Chinese')
     _ = languages[user_language].gettext
 
     if len(context.args) != 2:
@@ -409,13 +402,12 @@ def add_command(update: Update, context: CallbackContext) -> None:
             _("Use /start to Start.")]
     context.bot.send_message(
         chat_id=update.effective_chat.id,
-        text="\n".join(text),
-        parse_mode='html'
+        text="\n".join(text)
     )
 
 
 def url_command(update: Update, context: CallbackContext) -> None:
-    user_language = context.user_data['language']
+    user_language = context.user_data.setdefault('language', 'Chinese')
     _ = languages[user_language].gettext
 
     if len(context.args) < 1:
@@ -426,13 +418,12 @@ def url_command(update: Update, context: CallbackContext) -> None:
     text.append(controller.addUrl(url, context))
     context.bot.send_message(
         chat_id=update.effective_chat.id,
-        text="\n".join(text),
-        parse_mode='html'
+        text="\n".join(text)
     )
 
 
 def token_command(update: Update, context: CallbackContext) -> None:
-    user_language = context.user_data['language']
+    user_language = context.user_data.setdefault('language', 'Chinese')
     _ = languages[user_language].gettext
 
     if len(context.args) < 1:
@@ -443,13 +434,12 @@ def token_command(update: Update, context: CallbackContext) -> None:
     text.append(controller.addToken(token, context))
     context.bot.send_message(
         chat_id=update.effective_chat.id,
-        text="\n".join(text),
-        parse_mode='html'
+        text="\n".join(text)
     )
 
 
 def search_command(update: Update, context: CallbackContext) -> None:
-    user_language = context.user_data['language']
+    user_language = context.user_data.setdefault('language', 'Chinese')
     _ = languages[user_language].gettext
 
     send_message = update.message.reply_text
@@ -495,7 +485,7 @@ def search_command(update: Update, context: CallbackContext) -> None:
 
 
 def help_command(update: Update, context: CallbackContext) -> None:
-    user_language = context.user_data['language']
+    user_language = context.user_data.setdefault('language', 'Chinese')
     _ = languages[user_language].gettext
 
     message = update.message.reply_text(
@@ -539,30 +529,8 @@ def error_handler(update: object, context: CallbackContext) -> None:
     )
 
     # Finally, send the message
-    context.bot.send_message(chat_id=context.bot_data['developer_chat_id'], text=message, parse_mode=ParseMode.HTML)
-
-
-def pre_check_group_banned_cmd(update: Update, context: CallbackContext):
-    if 'language' not in context.user_data:
-        context.user_data['language'] = 'Chinese'
-    user_language = context.user_data['language']
-    _ = languages[user_language].gettext
-
-    cmd = update.effective_message.text.split()[0]
-    if '@' in cmd:
-        cmd = cmd.split('@')[0]
-
-    if cmd in context.bot_data['group_banned_command']:
-        message = update.effective_message.reply_text(
-            _("This command is not allowed in groups! Please send it privately!"))
-        context.job_queue.run_once(automatic_delete_message, auto_delete_duration, context=message)
-        raise DispatcherHandlerStop
+    context.bot.send_message(chat_id=context.bot_data['developer_chat_id'], text=message)
 
 
 def automatic_delete_message(context: CallbackContext):
     context.job.context.delete()
-
-
-def add_language(update: Update, context: CallbackContext):
-    if 'language' not in context.user_data:
-        context.user_data['language'] = 'Chinese'

@@ -3,9 +3,9 @@
 import os
 import time
 
-from telegram import Update
-from telegram.ext import Updater, CommandHandler, PicklePersistence, CallbackQueryHandler, TypeHandler, MessageHandler, \
-    Filters
+import pytz
+from telegram import ParseMode
+from telegram.ext import Updater, CommandHandler, PicklePersistence, CallbackQueryHandler, Filters, Defaults
 
 from utils import handler
 from utils.get_config import GetConfig
@@ -20,32 +20,29 @@ def main():
     base_url = None if len(config['TELEBOT']['base_url']) == 0 else config['TELEBOT']['base_url']
     base_file_url = None if len(config['TELEBOT']['base_file_url']) == 0 else config['TELEBOT']['base_file_url']
 
+    """Instantiate a Defaults object"""
+    defaults = Defaults(parse_mode=ParseMode.HTML, tzinfo=pytz.timezone('Asia/Shanghai'))
+
     """Start the bot."""
     my_persistence = PicklePersistence(filename='./data/my_file')
     updater = Updater(token=bot_token, persistence=my_persistence, use_context=True, base_url=base_url,
-                      base_file_url=base_file_url)
+                      base_file_url=base_file_url, defaults=defaults)
     # PS：use_context is by default False in v12, and True in v13
     # Get the dispatcher to register handlers
     dispatcher = updater.dispatcher
     dispatcher.bot_data['developer_chat_id'] = int(config['DEVELOPER']['developer_chat_id'])
-    dispatcher.bot_data['group_enabled_command'] = {'/help', '/id', '/all', '/search'}
-    dispatcher.bot_data['group_banned_command'] = {'/start', '/add', '/url', '/token', '/info', '/delete'}
-    # handlers that are forbidden in groups
-    group_banned_handlers = MessageHandler(filters=Filters.chat_type.groups & Filters.command,
-                                           callback=handler.pre_check_group_banned_cmd)
-    add_language_handlers = MessageHandler(filters=Filters.chat_type.private & Filters.command,
-                                           callback=handler.add_language)
-    dispatcher.add_handler(group_banned_handlers, -1)
-    dispatcher.add_handler(add_language_handlers, -1)
+    del dispatcher.bot_data['group_enabled_command']
+    del dispatcher.bot_data['group_banned_command']
     # on different commands - answer in Telegram
 
-    dispatcher.add_handler(CommandHandler('start', handler.start_command))
+    dispatcher.add_handler(
+        CommandHandler('start', handler.start_command, run_async=True, filters=Filters.chat_type.private))
     dispatcher.add_handler(CommandHandler('help', handler.help_command, run_async=True))
-    dispatcher.add_handler(CommandHandler('add', handler.add_command))
-    dispatcher.add_handler(CommandHandler('url', handler.url_command))
-    dispatcher.add_handler(CommandHandler('token', handler.token_command))
-    dispatcher.add_handler(CommandHandler('info', handler.info_command))
-    dispatcher.add_handler(CommandHandler('delete', handler.delete_command))
+    dispatcher.add_handler(CommandHandler('add', handler.add_command, filters=Filters.chat_type.private))
+    dispatcher.add_handler(CommandHandler('url', handler.url_command, filters=Filters.chat_type.private))
+    dispatcher.add_handler(CommandHandler('token', handler.token_command, filters=Filters.chat_type.private))
+    dispatcher.add_handler(CommandHandler('info', handler.info_command, filters=Filters.chat_type.private))
+    dispatcher.add_handler(CommandHandler('delete', handler.delete_command, filters=Filters.chat_type.private))
     dispatcher.add_handler(CommandHandler('id', handler.get_detail_keyboard, run_async=True))
     dispatcher.add_handler(CommandHandler('all', handler.get_detail_keyboard, run_async=True))
     dispatcher.add_handler(CommandHandler('search', handler.search_command, run_async=True))
