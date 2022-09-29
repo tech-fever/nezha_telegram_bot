@@ -33,9 +33,6 @@ def start_command(update: Update, context: CallbackContext) -> None:
     user_language = context.user_data.setdefault('language', 'Chinese')
     _ = languages[user_language].gettext
 
-    user_language = context.user_data['language']
-    _ = languages[user_language].gettext
-
     disclaimer = [_("version: {}").format(VERSION),
                   f"{time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(int(time.time()))) + ' CST'}",
                   f"Hi {update.effective_user.mention_html()}!",
