@@ -247,9 +247,11 @@ def get_detail_keyboard(update: Update, context: CallbackContext, server_id_str=
         if not controller.isPrivateChat(update):
             message = send_message(text=text)
         else:
-            if update.callback_query and text == update.effective_message.text:
+            if update.callback_query and text == update.effective_message.text_html:
                 return
             send_message(text=text, reply_markup=reply_markup)
+            # 由于是私聊，所以不需要自动删除
+            return
     else:
         message = send_message(text=text)
 
