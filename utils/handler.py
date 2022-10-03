@@ -4,7 +4,6 @@ import gettext
 import html
 import json
 import logging
-import time
 import traceback
 
 from telegram import Update, InlineKeyboardButton, InlineKeyboardMarkup
@@ -34,10 +33,10 @@ def start_command(update: Update, context: CallbackContext) -> None:
     _ = languages[user_language].gettext
 
     disclaimer = [_("version: {}").format(VERSION),
-                  f"{time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(int(time.time()))) + ' CST'}",
+                  # f"{time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(int(time.time()))) + ' CST'}",
                   f"Hi {update.effective_user.mention_html()}!",
                   _("This bot is used to query servers details on ") +
-                  "<a href='https://nezhahq.github.io/'>Nezha Dashboard</a>.",
+                  '<a href="https://nezhahq.github.io/">Nezha Dashboard</a>.',
                   _("<i>DISCLAIMER: </i>"),
                   _("<b>Security of sensitive information is guaranteed.</b>"),
                   _("Please be aware of the risks."),
@@ -69,15 +68,9 @@ def start_command(update: Update, context: CallbackContext) -> None:
             send_message = update.message.reply_text
         else:
             send_message = update.callback_query.edit_message_text
-        send_message(
-            disclaimer
-            + _("Your Nezha Dashboard is:\n")
-            + context.user_data['url']
-            + '\n'
-            + _("<b>Start NOW</b>!"),
-            reply_markup=reply_markup,
-        )
-
+        text = disclaimer + _("Your Nezha Dashboard is:\n") + context.user_data['url'] + '\n' + _("<b>Start NOW</b>!")
+        if text != update.effective_message.text_html:
+            send_message(text=text, reply_markup=reply_markup, disable_web_page_preview=True)
         return
 
     # Need to set something:
@@ -247,13 +240,13 @@ def get_detail_keyboard(update: Update, context: CallbackContext, server_id_str=
         if not controller.isPrivateChat(update):
             message = send_message(text=text)
         else:
-            if update.callback_query and text == update.effective_message.text_html:
+            if update.callback_query and text.strip() == update.effective_message.text_html:
                 return
             send_message(text=text, reply_markup=reply_markup)
             # 由于是私聊，所以不需要自动删除
             return
     else:
-        message = send_message(text=text)
+        message = send_message(text=html.escape(text))
 
     if not controller.isPrivateChat(update):
         context.job_queue.run_once(automatic_delete_message, auto_delete_duration, context=message)
@@ -328,9 +321,9 @@ def button(update: Update, context: CallbackContext) -> None:
     elif controller.isTag(query.data):
         tag_keyboard(update, context, query.data.split()[-1])
     elif controller.isID(query.data):
-        get_detail_keyboard(update, context, query.data.split()[-1], tag='')
+        get_detail_keyboard(update, context, query.data.split()[-1])
     elif controller.isRefreshID(query.data):
-        get_detail_keyboard(update, context, query.data.split()[-1], tag='')
+        get_detail_keyboard(update, context, query.data.split()[-1])
     elif controller.isDetailTag(query.data):
         get_detail_keyboard(update, context, tag=query.data.split()[-1])
     elif controller.isRefreshTag(query.data):

@@ -13,8 +13,8 @@ from utils.get_config import GetConfig
 
 def main():
     # TimeZone
-    os.environ['TZ'] = 'Asia/Shanghai'
-    time.tzset()
+    # os.environ['TZ'] = 'Asia/Shanghai'
+    # time.tzset()
     # Bot config
     bot_token = config['TELEBOT']['bot_token']
     base_url = None if len(config['TELEBOT']['base_url']) == 0 else config['TELEBOT']['base_url']
@@ -24,6 +24,9 @@ def main():
     defaults = Defaults(parse_mode=ParseMode.HTML, tzinfo=pytz.timezone('Asia/Shanghai'))
 
     """Start the bot."""
+    # mkdir if path not exists
+    if not os.path.exists('data'):
+        os.mkdir('data')
     my_persistence = PicklePersistence(filename='./data/my_file')
     updater = Updater(token=bot_token, persistence=my_persistence, use_context=True, base_url=base_url,
                       base_file_url=base_file_url, defaults=defaults)
@@ -31,8 +34,8 @@ def main():
     # Get the dispatcher to register handlers
     dispatcher = updater.dispatcher
     dispatcher.bot_data['developer_chat_id'] = int(config['DEVELOPER']['developer_chat_id'])
-    del dispatcher.bot_data['group_enabled_command']
-    del dispatcher.bot_data['group_banned_command']
+    dispatcher.bot_data.pop('group_enabled_command', None)
+    dispatcher.bot_data.pop('group_banned_command', None)
     # on different commands - answer in Telegram
 
     dispatcher.add_handler(

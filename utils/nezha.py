@@ -2,8 +2,10 @@
 import gettext
 import time
 from collections import defaultdict
+from datetime import datetime
 
 import humanize as humanize
+import pytz
 
 from utils import flag
 
@@ -240,6 +242,5 @@ def calUptime(boot_time: int, user_language: str) -> str:
 
 
 def getTime(timestamp: int) -> str:
-    # time_delta = 28800  # 8 * 3600 8 Hours
-    # bj_dt = timestamp + time_delta
-    return time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(timestamp)) + " CST"
+    tz = pytz.timezone('Asia/Shanghai')
+    return datetime.fromtimestamp(timestamp, tz).strftime("%Y-%m-%d %H:%M:%S %Z%z")
