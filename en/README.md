@@ -159,8 +159,8 @@ This project uses `crowdin` for multilingual translation. If you have suggestion
 
 You can also download the `myapplication.pot` file in the project to local for editing and development.
 
-## Grateful for
+## Inspiration
 
-- [Nezha Panel](https://github.com/naiba/nezha)<br><br>This project is inspired by
+- [Nezha Panel](https://github.com/naiba/nezha)
 - [nezha_api_tgbot](https://github.com/spiritLHLS/nezha_api_tgbot) by [spiritLHLS](https://github.com/spiritLHLS)
 - [NezhaBot](https://github.com/Erope/NezhaBot) by [Erope](https://github.com/Erope)
