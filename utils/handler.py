@@ -434,8 +434,7 @@ def search_command(update: Update, context: CallbackContext) -> None:
     user_language = context.user_data.setdefault('language', 'Chinese')
     _ = languages[user_language].gettext
 
-    send_message = update.message.reply_text
-    edit_message = context.bot.edit_message_text
+    send_message = update.effective_message.reply_text
     # is user's url and token added?
     for key in keys:
         if key not in context.user_data:
@@ -468,9 +467,9 @@ def search_command(update: Update, context: CallbackContext) -> None:
             texts = [
                 _("No server detected."), _("Please try again.")
             ]
-        message = edit_message(text='\n'.join(texts), chat_id=message.chat_id, message_id=message.message_id)
+        message = message.edit_text(text='\n'.join(texts))
     else:
-        message = edit_message(text=text, chat_id=message.chat_id, message_id=message.message_id)
+        message = message.edit_text(text)
 
     if not controller.isPrivateChat(update):
         context.job_queue.run_once(automatic_delete_message, auto_delete_duration, context=message)

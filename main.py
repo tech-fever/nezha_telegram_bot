@@ -1,7 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: UTF-8 -*-
 import os
-import time
 
 import pytz
 from telegram import ParseMode
@@ -13,8 +12,6 @@ from utils.get_config import GetConfig
 
 def main():
     # TimeZone
-    # os.environ['TZ'] = 'Asia/Shanghai'
-    # time.tzset()
     # Bot config
     bot_token = config['TELEBOT']['bot_token']
     base_url = None if len(config['TELEBOT']['base_url']) == 0 else config['TELEBOT']['base_url']
@@ -51,8 +48,6 @@ def main():
     dispatcher.add_handler(CommandHandler('search', handler.search_command, run_async=True))
     updater.dispatcher.add_handler(CallbackQueryHandler(handler.button, run_async=True))
     dispatcher.add_error_handler(handler.error_handler, run_async=True)
-
-    # job job_queue
 
     # start the bot using polling
     updater.start_polling()
