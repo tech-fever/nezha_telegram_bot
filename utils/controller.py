@@ -107,7 +107,7 @@ def getNezhaList(context, tag=''):
     url = url.strip('/')
     url = url + LIST_ROUTER + 'tag=' + tag
     try:
-        r = requests.get(url, headers=headers)
+        r = requests.get(url, headers=headers, timeout=30)
         timestamp = int(time.time())
     except BaseException as e:
         msg = '%s' % e
@@ -149,7 +149,7 @@ def getNezhaDetail(context, server_id='', tag=''):
     url = url + DETAILS_ROUTER + 'id=' + server_id + '&tag=' + tag
 
     try:
-        r = requests.get(url, headers=headers)
+        r = requests.get(url, headers=headers, timeout=30)
         timestamp = int(time.time())
     except BaseException as e:
         msg = '%s' % e
